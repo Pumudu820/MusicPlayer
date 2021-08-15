@@ -100,7 +100,7 @@ async def yplay(_, message: Message):
                 type="query"
                 ysearch=query
         else:
-            d=await message.reply_text("You Didn't gave me anything to play. Send me a audio file or reply /play to an audio file.")
+            d=await message.reply_text("You Didn't gave me anything to play. Send me a audio file or reply /play to an audio file or /play <song name> .")
             await mp.delete(d)
             await mp.delete(message)
             return
@@ -173,11 +173,11 @@ async def yplay(_, message: Message):
 
     if type=="youtube" or type=="query":
         if type=="youtube":
-            msg = await message.reply_text("⚡️ **Fetching Song From YouTube...**")
+            msg = await message.reply_text("🔄 **Processing...**")
             url=yturl
         elif type=="query":
             try:
-                msg = await message.reply_text("⚡️ **Fetching Song From YouTube...**")
+                msg = await message.reply_text("🎶 **Hang on...Player start soon**")
                 ytquery=ysearch
                 results = YoutubeSearch(ytquery, max_results=1).to_dict()
                 url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -696,13 +696,8 @@ allcmd = ["play", "player", f"play@{U}", f"player@{U}"] + admincmds
 async def not_chat(_, m: Message):
     buttons = [
         [
-            InlineKeyboardButton('⚡️Make Own Bot', url='https://heroku.com/deploy?template=https://github.com/subinps/MusicPlayer'),
-            InlineKeyboardButton('🧩 Source Code', url='https://github.com/subinps/MusicPlayer'),
-        ],
-        [
-            InlineKeyboardButton('How to Make', url='https://youtu.be/iBK-5pP2eHM'),
             InlineKeyboardButton('👨🏼‍🦯 Help', callback_data='help')       
         ]
         ]
-    k=await m.reply("<b>You can't use this bot in this group, for that you have to make your own bot from the [SOURCE CODE](https://github.com/subinps/MusicPlayer) below.</b>", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(buttons))
+    k=await m.reply("<b>You can't use this [bot](https://telegra.ph/file/7d54c912e6de70dd1eecc.png) in this group. </b>", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(buttons))
     await mp.delete(m)
